@@ -60,6 +60,7 @@ public class H2Bd {
                         rs.getString("LNAME"),
                         rs.getLong("AGE")));
             }
+            execute().close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -71,10 +72,11 @@ public class H2Bd {
                 "lname='"+ person.getLname()+"', " +
                 "age="+ person.getAge()+" " +
                 "Where ID="+person.getId());
+        execute().close();
     }
 
     public void delete(long id) throws SQLException {
-        //Как закрывать потоки?
         execute().executeUpdate("DELETE FROM Person WHERE ID =" + id);
+        execute().close();
     }
 }
