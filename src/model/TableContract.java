@@ -5,6 +5,6 @@ import java.util.List;
 public interface TableContract {
     void setAllValue(List<Person> list);
     void setValue(Person pers);
-    void setUpdateValue(Person pers);
+    void setUpdateValue(Person pers, boolean flag);
     void delValue(long id);
 }

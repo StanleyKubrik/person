@@ -38,10 +38,11 @@ public class H2Bd {
 
     public void create(Person person) {
         try {
-            ResultSet rs = execute().executeQuery("SELECT COUNT(*) AS rowcount FROM Person");
+            ResultSet rs = execute().executeQuery("SELECT MAX(id) FROM Person");
             rs.last();
-            int id = rs.getRow();
-            execute().executeUpdate("insert into Person values(" + ++id +
+            Long id = rs.getLong(1);
+            person.setId(++id);
+            execute().executeUpdate("insert into Person values(" + person.getId() +
                     ",'" + person.getFname() + "','" + person.getLname() + "'," + person.getAge() + ")");
             execute().close();
         } catch (SQLException e) {

@@ -65,9 +65,13 @@ public class Controler  implements IControler, DialogCreate.DialogCreateCallBack
     @Override
     public void callBackUpdate(Person person) throws SQLException {
         // обновляем таблицу на изменение
-        //tabelConfig.setUpdateValue(Mock.getInstance().updateUI(person));
+        //Mock.getInstance().updateUI(person);
         H2Bd.getInstance().update(person);
-        tabelConfig.setUpdateValue(person);
+        if(H2Bd.getInstance() != null) {
+            tabelConfig.setUpdateValue(person, true);
+        }else {
+            tabelConfig.setUpdateValue(person, false);
+        }
     }
 
     @Override
