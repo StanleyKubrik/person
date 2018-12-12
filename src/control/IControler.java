@@ -5,4 +5,5 @@ public interface IControler {
     void read();
     void update();
     void delete();
+    void search();
 }

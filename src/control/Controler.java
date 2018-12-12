@@ -10,7 +10,7 @@ import java.sql.SQLException;
 
 
 public class Controler  implements IControler, DialogCreate.DialogCreateCallBack,
-        DialogUpdate.DialogUpdateCallBack, DialogDelete.DialogDeleteCallBack {
+        DialogUpdate.DialogUpdateCallBack, DialogDelete.DialogDeleteCallBack, DialogSearch.DialogSearchCallBack {
     //То что обновляет таблицу
     private TableContract tabelConfig;
     // Интерфейс фабрики
@@ -55,6 +55,11 @@ public class Controler  implements IControler, DialogCreate.DialogCreateCallBack
     }
 
     @Override
+    public void search() {
+
+    }
+
+    @Override
     public void callBackCreate(Person person) {
         // обновляем таблицу , записываем в БД
         H2Bd.getInstance().create(person);
@@ -67,11 +72,7 @@ public class Controler  implements IControler, DialogCreate.DialogCreateCallBack
         // обновляем таблицу на изменение
         //Mock.getInstance().updateUI(person);
         H2Bd.getInstance().update(person);
-        if(H2Bd.getInstance() != null) {
-            tabelConfig.setUpdateValue(person, true);
-        }else {
-            tabelConfig.setUpdateValue(person, false);
-        }
+        tabelConfig.setUpdateValue(person);
     }
 
     @Override
@@ -85,5 +86,10 @@ public class Controler  implements IControler, DialogCreate.DialogCreateCallBack
     public Person eventUpdate(long id) throws SQLException {
         //return Mock.getInstance().update(id);
         return H2Bd.getInstance().search(id);
+    }
+
+    @Override
+    public void callBackSearch(Long id, String fname, String lname) {
+
     }
 }

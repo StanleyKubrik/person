@@ -69,9 +69,9 @@ public class H2Bd {
 
     public void update(Person person) throws SQLException {
         execute().executeUpdate("Update Person set fname='" + person.getFname()+"', " +
-                "lname='"+ person.getLname()+"', " +
-                "age="+ person.getAge()+" " +
-                "Where ID="+person.getId());
+                "lname='" + person.getLname() + "', " +
+                "age=" + person.getAge()+" " +
+                "Where ID=" + person.getId());
         execute().close();
     }
 

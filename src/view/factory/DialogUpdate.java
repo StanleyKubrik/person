@@ -86,7 +86,7 @@ public class DialogUpdate<T extends DialogUpdate.DialogUpdateCallBack> extends J
         ok.addActionListener(e -> {
             try {
                 callBack.callBackUpdate(new Person(
-                        index,
+                        Long.parseLong(d_Id.getText()),
                         d_FName.getText(),
                         d_LName.getText(),
                         Integer.parseInt(d_Age.getText())));

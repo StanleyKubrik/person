@@ -1,25 +1,17 @@
 package view.factory;
 
 import model.Person;
+
 import javax.swing.*;
 import java.awt.*;
+import java.sql.SQLException;
 
-/**
- * Объект Диалог создания персон, имеет:
- * родителя JDialog
- * Интерфей IDialogFactory(Используем фабрику, для приведения к одному типу с другими объектами диалога)
- * Джинерик который наследуется от T extends DialogCreate.DialogCreateCallBack,
- * имеет внутрений интерфейс,кторый служит инициализацией, и обратным вызовом.
- *
- * @param <T>
- */
-public class DialogCreate<T extends DialogCreate.DialogCreateCallBack> extends JDialog
-        implements IDialogFactory{
-    public interface DialogCreateCallBack {
-        void callBackCreate(Person person);
+public class DialogSearch<T extends DialogSearch.DialogSearchCallBack> extends JDialog implements IDialogFactory {
+    public interface DialogSearchCallBack {
+        void callBackSearch(Long id, String fname, String lname);
     }
 
-    public DialogCreate(T callBack) {
+    public DialogSearch(T callBack) {
         setLayout(null);
         setTitle("From Create");
         getContentPane().setBackground(Color.LIGHT_GRAY);
@@ -62,12 +54,7 @@ public class DialogCreate<T extends DialogCreate.DialogCreateCallBack> extends J
         add(lbl_Age);
 
         ok.addActionListener(e -> {
-            //При клике на ок создание персоны без айдишника, и передача обратному вызову в контролер.
-            callBack.callBackCreate(new Person(
-                    d_FName.getText(),
-                    d_LName.getText(),
-                    Long.parseLong(d_Age.getText())
-            ));
+            callBack.callBackSearch();
             setVisible(false);
         });
         cancel.addActionListener(e -> setVisible(false));
