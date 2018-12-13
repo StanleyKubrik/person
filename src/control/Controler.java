@@ -83,13 +83,13 @@ public class Controler  implements IControler, DialogCreate.DialogCreateCallBack
     }
 
     @Override
-    public Person eventUpdate(long id) throws SQLException {
-        //return Mock.getInstance().update(id);
-        return H2Bd.getInstance().search(id);
+    public void callBackSearch(Person person) {
+
     }
 
     @Override
-    public void callBackSearch(Long id, String fname, String lname) {
-
+    public Person eventUpdate(long id) throws SQLException {
+        //return Mock.getInstance().update(id);
+        return H2Bd.getInstance().search(id);
     }
 }

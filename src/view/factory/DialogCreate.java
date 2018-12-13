@@ -21,7 +21,7 @@ public class DialogCreate<T extends DialogCreate.DialogCreateCallBack> extends J
 
     public DialogCreate(T callBack) {
         setLayout(null);
-        setTitle("From Create");
+        setTitle("Form Create");
         getContentPane().setBackground(Color.LIGHT_GRAY);
         setBounds(300, 300, 300, 300);
 

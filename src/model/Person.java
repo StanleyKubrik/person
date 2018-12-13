@@ -19,6 +19,12 @@ public class Person {
         this.age = age;
     }
 
+    public Person(Long id, String fname, String lname) {
+        this.id = id;
+        this.fname = fname;
+        this.lname = lname;
+    }
+
     public Person(int index, String fname, String lname, long age) {
 
         this.index = index;

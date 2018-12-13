@@ -26,7 +26,7 @@ public class H2Bd {
         return DriverManager.getConnection("jdbc:h2:~/test", "sa", "").createStatement();
     }
 
-    public Person search(long id) throws SQLException{
+    public Person search(long id) throws SQLException {
         ResultSet rs = execute().executeQuery("SELECT * FROM Person WHERE ID=" + id);
         rs.next();
         Person p = new Person(rs.getLong("ID"),
