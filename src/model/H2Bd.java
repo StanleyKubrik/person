@@ -22,12 +22,23 @@ public class H2Bd {
         return instance;
     }
 
-    public Statement execute() throws SQLException {
+    private Statement execute() throws SQLException {
         return DriverManager.getConnection("jdbc:h2:~/test", "sa", "").createStatement();
     }
 
-    public Person search(long id) throws SQLException {
-        ResultSet rs = execute().executeQuery("SELECT * FROM Person WHERE ID=" + id);
+    public Person search(Long id, String fname, String lname, Long age) throws SQLException {
+        ResultSet rs = execute().executeQuery("SELECT * FROM Person WHERE ID LIKE '" + id +
+                "'OR FNAME LIKE '" + fname + "' OR LNAME LIKE '" + lname + "' OR AGE LIKE " + age);
+        rs.next();
+        Person p = new Person(rs.getLong("ID"),
+                rs.getString("FNAME"),
+                rs.getString("LNAME"),
+                rs.getLong("AGE"));
+        return p;
+    }
+
+    public Person search(Long id) throws SQLException {
+        ResultSet rs = execute().executeQuery("SELECT * FROM Person WHERE ID = " + id);
         rs.next();
         Person p = new Person(rs.getLong("ID"),
                 rs.getString("FNAME"),
@@ -68,9 +79,9 @@ public class H2Bd {
     }
 
     public void update(Person person) throws SQLException {
-        execute().executeUpdate("Update Person set fname='" + person.getFname()+"', " +
+        execute().executeUpdate("Update Person set fname='" + person.getFname() + "', " +
                 "lname='" + person.getLname() + "', " +
-                "age=" + person.getAge()+" " +
+                "age=" + person.getAge() + " " +
                 "Where ID=" + person.getId());
         execute().close();
     }

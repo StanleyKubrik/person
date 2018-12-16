@@ -26,7 +26,7 @@ public class Table extends AbstractTableModel implements TableContract {
     //Формеруем название столбцев
     @Override
     public String getColumnName(int column) {
-        String[] columnName = {"id","Index", "FName", "LName", "Age"};
+        String[] columnName = {"ID","Index", "FName", "LName", "Age"};
         return columnName[column];
     }
 

@@ -1,7 +1,6 @@
 package control;
 
 import model.H2Bd;
-import model.Mock;
 import model.Person;
 import model.TableContract;
 import view.factory.*;
@@ -9,18 +8,18 @@ import view.factory.*;
 import java.sql.SQLException;
 
 
-public class Controler  implements IControler, DialogCreate.DialogCreateCallBack,
+public class Controller implements IControler, DialogCreate.DialogCreateCallBack,
         DialogUpdate.DialogUpdateCallBack, DialogDelete.DialogDeleteCallBack, DialogSearch.DialogSearchCallBack {
     //То что обновляет таблицу
-    private TableContract tabelConfig;
+    private TableContract tableContract;
     // Интерфейс фабрики
     private IDialogFactory iDialogFactory;
 
 
 
-    public Controler(TableContract tabelConfig) {
+    public Controller(TableContract tableContract) {
         // Получаем то что обновляет таблицу из панели
-        this.tabelConfig = tabelConfig;
+        this.tableContract = tableContract;
 
     }
 
@@ -36,8 +35,8 @@ public class Controler  implements IControler, DialogCreate.DialogCreateCallBack
 
     @Override
     public void read() {
-        //tabelConfig.setAllValue(Mock.getInstance().read());
-        tabelConfig.setAllValue(H2Bd.getInstance().read());
+        //tableContract.setAllValue(Mock.getInstance().read());
+        tableContract.setAllValue(H2Bd.getInstance().read());
     }
 
     @Override
@@ -56,15 +55,17 @@ public class Controler  implements IControler, DialogCreate.DialogCreateCallBack
 
     @Override
     public void search() {
-
+        iDialogFactory = FactoryDialog.getInstance().factoryMethod(this, "search");
+        iDialogFactory.setModal(true);
+        iDialogFactory.setVisible(true);
     }
 
     @Override
     public void callBackCreate(Person person) {
-        // обновляем таблицу , записываем в БД
+        // обновляем таблицу, записываем в БД
         H2Bd.getInstance().create(person);
         //Mock.getInstance().create(person);
-        tabelConfig.setValue(person);
+        tableContract.setValue(person);
     }
 
     @Override
@@ -72,19 +73,20 @@ public class Controler  implements IControler, DialogCreate.DialogCreateCallBack
         // обновляем таблицу на изменение
         //Mock.getInstance().updateUI(person);
         H2Bd.getInstance().update(person);
-        tabelConfig.setUpdateValue(person);
+        tableContract.setUpdateValue(person);
     }
 
     @Override
     public void callBackDelete(long id) throws SQLException {
-        tabelConfig.delValue(id);
         //Mock.getInstance().delete(id);
         H2Bd.getInstance().delete(id);
+        tableContract.delValue(id);
     }
 
     @Override
-    public void callBackSearch(Person person) {
-
+    public void callBackSearch(Long id, String fname, String lname, Long age) throws SQLException {
+        H2Bd.getInstance().search(id, fname, lname, age);
+        tableContract.setValue(H2Bd.getInstance().search(id));
     }
 
     @Override

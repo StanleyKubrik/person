@@ -1,6 +1,6 @@
 package view;
 
-import control.Controler;
+import control.Controller;
 import control.IControler;
 import model.Table;
 import model.TableContract;
@@ -22,12 +22,12 @@ public class Panel extends JPanel {
     public Panel()
     {
         TableContract tabelConfig = new Table();
-        iControler = new Controler(tabelConfig);
+        iControler = new Controller(tabelConfig);
         setLayout(null);
-        setBackground(Color.CYAN);
+        setBackground(Color.gray);
         tbl = new JTable((TableModel) tabelConfig);
         scr = new JScrollPane(tbl);
-        scr.setBounds(10, 10, 400, 400);
+        scr.setBounds(10, 10, 400, 435);
 
         create =  new JButton("Create");
         read   =  new JButton("Read");
