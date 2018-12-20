@@ -105,7 +105,8 @@ public class H2Bd {
     }
 
     public void delete() throws SQLException {
-        execute().executeUpdate("DELETE * FROM Person");
+        //TODO было так  execute().executeUpdate("DELETE * FROM Person");
+        execute().executeUpdate("delete from Person");
         execute().close();
     }
 }
