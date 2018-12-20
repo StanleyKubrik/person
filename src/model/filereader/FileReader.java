@@ -30,7 +30,7 @@ public class FileReader implements FileReaderContract {
         StringBuilder text = new StringBuilder();
         if(fileInputStream != null){
             byte[] buffer = new byte[1024];
-            while((fileInputStream.read(buffer)) != -1) {
+            while(fileInputStream.read() != -1) {
                 String bug = new String(buffer, StandardCharsets.UTF_8);
                 text.append(bug);
             }
