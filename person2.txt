@@ -1,0 +1,1 @@
+[{"fname":"Nikita","lname":"Sukhonosov","index":0,"id":1,"age":23},{"fname":"Yuriy","lname":"Leshchenko","index":0,"id":2,"age":25},{"fname":"Ira","lname":"Fomina","index":0,"id":3,"age":20},{"fname":"Daniil","lname":"Nizkiy","index":0,"id":4,"age":21},{"fname":"Alexandr","lname":"Unknown","index":0,"id":5,"age":25},{"fname":"Vitaliy","lname":"Unknown","index":0,"id":6,"age":24}]

@@ -6,11 +6,14 @@ import model.Table;
 import model.TableContract;
 import model.filereader.FileReader;
 import model.filereader.FileReaderContract;
+import org.json.JSONException;
 
 import javax.swing.*;
 import javax.swing.table.TableModel;
 import java.awt.*;
 import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.sql.SQLException;
 
 public class Panel extends JPanel {
     private IControler iControler;
@@ -76,7 +79,19 @@ public class Panel extends JPanel {
         update.addActionListener(v-> iControler.update());
         delete.addActionListener(v-> iControler.delete());
         search.addActionListener(v-> iControler.search());
-        imp.addActionListener(v-> iControler.imp());
-        exp.addActionListener(v-> iControler.exp());
+        imp.addActionListener(v -> {
+            try {
+                iControler.imp();
+            } catch (IOException | JSONException | SQLException e) {
+                e.printStackTrace();
+            }
+        });
+        exp.addActionListener(v -> {
+            try {
+                iControler.exp();
+            } catch (IOException | JSONException e) {
+                e.printStackTrace();
+            }
+        });
     }
 }

@@ -6,24 +6,18 @@ import model.Person;
 import model.TableContract;
 import model.filereader.FileReader;
 import model.filereader.FileReaderContract;
-import org.json.JSONArray;
 import org.json.JSONException;
-import org.json.JSONObject;
 import view.factory.*;
-
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 
-
 public class Controller implements IControler, DialogCreate.DialogCreateCallBack,
         DialogUpdate.DialogUpdateCallBack, DialogDelete.DialogDeleteCallBack, DialogSearch.DialogSearchCallBack {
-    //То что обновляет таблицу
+    // То что обновляет таблицу
     private TableContract tableContract;
     // Интерфейс фабрики
     private IDialogFactory iDialogFactory;
-    // Интерфейс FileReader
 
     public Controller(TableContract tableContract) {
         // Получаем то что обновляет таблицу из панели
@@ -68,7 +62,7 @@ public class Controller implements IControler, DialogCreate.DialogCreateCallBack
     }
 
     @Override
-    public void imp() throws IOException, SQLException {
+    public void imp() throws IOException, SQLException, JSONException {
         JSonParser jSonParser = new JSonParser();
         List<Person> list = jSonParser.fromJSon(new FileReader().reader());
         H2Bd.getInstance().delete();
@@ -77,7 +71,7 @@ public class Controller implements IControler, DialogCreate.DialogCreateCallBack
     }
 
     @Override
-    public void exp() throws IOException {
+    public void exp() throws IOException, JSONException {
         FileReaderContract fileReaderContract = new FileReader();
         fileReaderContract.writer(new JSonParser().toJSon(H2Bd.getInstance().read()));
     }
